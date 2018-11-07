@@ -1,3 +1,6 @@
+
+
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'gloals.dart' as globals;
@@ -20,7 +23,7 @@ class lalaState extends State<lala> {
    bool validateAndSave()
   {
     final form = formKey.currentState;
-    
+
     if(form.validate()){
       form.save();//onSave에 해당하는 거 실행.
 
@@ -32,9 +35,9 @@ class lalaState extends State<lala> {
   }
 
 
-  
-  Widget build(BuildContext context){ 
-    
+
+  Widget build(BuildContext context){
+
 
     return new Scaffold(
         backgroundColor: Colors.white,
@@ -62,8 +65,8 @@ class lalaState extends State<lala> {
     //   style: new TextStyle(
     //   fontSize: 2.0,
     //   height: 10.0,
-      
-    //   color: Colors.black                  
+
+    //   color: Colors.black
     // ),
     maxLines: 5,
     keyboardType: TextInputType.multiline,
@@ -80,12 +83,15 @@ class lalaState extends State<lala> {
         print('Name can\'t be enpty');
       }
       else{
-        
-            storage.runTransaction((Transaction transaction)async{
-      storage.collection('uide').document(globals.userUID).collection(globals.userUID).document().setData({"posting": value,"editing":false,"uid":globals.userUID,"user":globals.userName});//.setData({"complete" : false,"mission" : true});
-    }
+        storage.runTransaction((Transaction transaction)async{
+          storage.collection('Button').document().setData({"complete":true});//.setData({"complete" : false,"mission" : true});
+        }
+
+//            storage.runTransaction((Transaction transaction)async{
+//      storage.collection('uide').document(globals.userUID).collection(globals.userUID).document().setData({"posting": value,"editing":false,"uid":globals.userUID,"user":globals.userName});//.setData({"complete" : false,"mission" : true});
+//    }
     );
- 
+
 
 
                   var now=new DateTime.now();
@@ -95,10 +101,10 @@ class lalaState extends State<lala> {
                 Firestore.instance.collection('uido');
 
 
-                
+
                 await reference
                       .add({"posting": value,"editing":false,"uid":globals.userUID,"date":now,"user":globals.userName});
-        
+
               });
 
       }
@@ -120,7 +126,7 @@ class lalaState extends State<lala> {
            height: 46.0,
            onPressed:  validateAndSave,
            color: Colors.red[200],
-           child: Text('POSTING',style: TextStyle(color: Colors.white)), 
+           child: Text('POSTING',style: TextStyle(color: Colors.white)),
               ),
        ),
       )
